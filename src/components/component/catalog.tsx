@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -16,7 +16,8 @@ import {
 const ITEMS_PER_PAGE = 12;
 
 export function Catalog() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [products, setProducts] = useState([
@@ -153,6 +154,20 @@ export function Catalog() {
       brand: "Vevo Max",
     },
   ]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get("search") || "";
+    setSearchTerm(searchQuery);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && searchTerm !== "") {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set("search", searchTerm);
+      router.push(newUrl.toString());
+    }
+  }, [searchTerm, router]);
 
   const filteredProducts = useMemo(() => {
     return products.filter(
