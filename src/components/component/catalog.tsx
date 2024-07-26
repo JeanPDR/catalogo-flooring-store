@@ -443,6 +443,19 @@ export function Catalog() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <div className="flex justify-center mb-8">
+        <a
+          href="https://flooring-store.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/Transparent-Logo.avif" // Substitua pelo caminho correto para sua imagem
+            alt="Search"
+            className="w-36 h-[100%]"
+          />
+        </a>
+      </div>
       <div className="mb-8">
         <Input
           type="text"
