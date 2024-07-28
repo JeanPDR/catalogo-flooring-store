@@ -510,7 +510,11 @@ export function Catalog() {
     setCurrentPage(page);
   };
 
-  const handleImageClick = (product: { id: number; newImage: string }) => {
+  const handleImageClick = (product: {
+    id: number;
+    newImage: string;
+    title: string;
+  }) => {
     setSelectedProduct(product);
   };
 
